@@ -1,0 +1,244 @@
+OOPS in python:To map with real world scenarios, we start using objects in code
+This is called Object Oriented Programming
+Functions decreases the redundancy and increases the reusability
+Procedural -> Functional -> Object Oriented Programming
+
+**class is a blueprint for creating objects
+class Student:
+    name="karan"
+
+s1=Student() #object is instance of class
+print(s1.name)
+
+__init__ function: __init__ called as constructor
+All classes have function called __init__() which is always executed when the object is being initiated
+
+class Student:
+
+    #default constructor
+    def __init__():
+        pass
+    #parametrized constructor
+    def __init__(self,fullname):
+        self.name=fullname    #self.name is the name created in object it is not the argument came from object
+
+#creating object
+s1=Student("fasi")
+print(s1.name)
+
+The self parameter is a reference to the current instance of the class, and is used to access variables that belongs to the class.
+
+**Class and Instance Attributes:
+Class.attr: attributes common for all the objects
+if we have class with name Student the we can access as Student.collegename
+when we have same name of class attribute and object attribute, object attribute has higher preference
+
+**Methods:methods are functions that belong to objects
+
+**Static Method:Methods that don't use the self parameter (work at class level).For all the instances created this method will be common and not be creared everytime when an object is created
+
+class Student:
+    @staticmethod
+    def college():
+        print(f'my college name is GRIET')
+
+Four pillers of OOPS:
+1.Abstraction
+2.Encapsulation
+3.Inheritence
+4.Polymorphism
+
+**Abstraction:Hiding the implementation details of the class and only showing the essential features of the user.
+Abstarct->hide
+
+#Abstraction
+class Car:
+    def __init__(self):
+        self.acc=False
+        self.brk=False
+        self.clutch=False
+    def start(self):
+        self.acc=True
+        self.clutch=True
+        print(f'Car has started')
+car=Car()
+car.start()
+
+Here we are hiding the unnecessary details like acc,clutch 
+
+**Encapsulation:Wrapping data and functions into a single unit(object)
+
+del keyword:Used to delete object properties or object itself.
+del s1.name
+del s1
+
+**Private(like) attributes and methods:Private attributes and classes are meant to be used only within the class and are not
+accessible from outside the class
+we can define private attribute by putting __ in front of attribute
+
+#Private attribute and method code
+class Account:
+    def __init__(self,acc_no,acc_pass):
+        self.acc_no=acc_no
+        self.__acc_pass=acc_pass
+
+    def reset_password(self):
+        print(f'password {self.__acc_pass}')
+
+    def __hello(self):  #can not be accessed outside the class
+        print(f'welcome')
+
+    def welcome(self):
+        self.__hello()
+
+acc1=Account(12345,"abcde")
+acc1.reset_password() #this will print the password
+acc1.welcome() # this will print welcome
+acc1.__hello() # this will throw an error
+print(acc1.__acc_pass) #this will throw the error
+
+**Inheritence:When one class(child/derived) derives the properties or methods of another class(parent/base)
+#Inheritance
+class Car:
+    @staticmethod
+    def start():
+        print(f'car started..')
+
+    @staticmethod
+    def stop():
+        print(f'car stopped')
+
+class ToyotaCar(Car):
+    def __init__(self,name):
+        self.name=name
+
+car1=ToyotaCar("fortuner")
+car2=ToyotaCar("prius")
+car1.start()
+car2.stop()
+#output
+car started..
+car stopped
+
+**3 types of Inheritance
+1.Single Inheritance 2.multiple Inheritance 3.Multilevel Inheritance
+
+**Super Method:super() method is used to access the methods of the parent class
+class Car1:
+    def __init__(self,type):
+        self.type=type
+    @staticmethod
+    def start():
+        print(f'car started..')
+
+    @staticmethod
+    def stop():
+        print(f'car stopped')
+
+class ToyotaCar1(Car1):
+    def __init__(self,brand,type):
+        super().start()
+        super().__init__(type)
+        self.brand=brand
+ 
+
+cara=ToyotaCar1("prius","electric")
+print(cara.type)
+
+**class method:A class method is bound to the class and recevies the class as an implicit first argument
+Note:static method can't access or modify class state and generally for utility
+
+There are different ways to change the class attribute like below 
+
+class Person:
+    name="Anonymous"
+    def changename(self,name):
+        self.__class__.name=name
+    def changename2(self,name):
+        Person.name=name
+
+    @classmethod
+    def changeName3(cls,name):  #cls is not self it is refering to class
+        cls.name=name
+
+p1=Person()
+p1.changename("fasi")
+print(p1.name)  #fasi
+print(Person.name)  #fasi
+p1.changename2("uddin")
+print(p1.name)   #uddin
+print(Person.name)  #uddin
+p1.changeName3("fasiuddin")
+print(p1.name)   #fasiuddin
+print(Person.name) #fasiuddin
+
+We have read about three methods which are
+1.static Method:@staticmethod used with out self
+2.class Method:@classmethod used to access class attributes
+3.instance Method:used to access instance attributes and methods
+
+**Property:We use @Property decorator on any method in the class to use the method as a property.
+class Student:
+    def __init__(self,phy,scie,math):
+        self.phy=phy
+        self.scie=scie
+        self.math=math
+        self.percentage=str((self.phy+self.scie+self.math)/3)+"%"
+    @property
+    def percentage1(self):
+        return str((self.phy+self.scie+self.math)/3)+"%"
+
+
+stu1=Student(99,98,97)
+print(stu1.percentage)
+stu1.math=100
+print(stu1.math)
+print(stu1.percentage). #98
+print(stu1.percentage1). #99
+
+**Polymorphism:Operator Overloading
+When the same operator is allowed to have different meanings according to the context
+Dunder Functions:Dunder function are we modify the operators according to our use by just putting __ for example
+a.__add__(b)
+a.__sub__(b)
+a.__mul____(b)
+a.__truediv____(b)
+a.__mod____(b)
+
+actually when we create two objects we can not add two objects directly we have to define some method also to add them
+here we use dunder functions to add them, in below example I also wtritten without dunder function using addNumber we can add them 
+
+#Polymorphism using dunder functions
+class Complex:
+    def __init__(self,real,img):
+        self.real=real
+        self.img=img
+
+    def showNumber(self):
+        print(self.real,"i +",self.img,"j")
+
+    def addNumber(self,num2):
+        new_real=self.real+num2.real
+        new_real=self.img+num2.img
+        return Complex(new_real,new_real)
+    
+    def __add__(self,num2):
+        new_real=self.real+num2.real
+        new_real=self.img+num2.img
+        return Complex(new_real,new_real)
+
+
+num1=Complex(1,3)
+num1.showNumber()
+
+num2=Complex(4,5)
+num2.showNumber()
+
+num3=num1.addNumber(num2)
+num3.showNumber()
+
+num4=num1+num2
+num4.showNumber()
+
+
+

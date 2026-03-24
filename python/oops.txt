@@ -198,7 +198,7 @@ print(stu1.percentage1). #99
 
 **Polymorphism:Operator Overloading
 When the same operator is allowed to have different meanings according to the context
-Dunder Functions:Dunder function are we modify the operators according to our use by just putting __ for example
+Dunder Functions:Dunder function are we modify the operators according to our use by just putting __(underscore) for example
 a.__add__(b)
 a.__sub__(b)
 a.__mul____(b)
@@ -239,6 +239,86 @@ num3.showNumber()
 
 num4=num1+num2
 num4.showNumber()
+
+**Getter and Setter:In python getter and setter methods are used to access and modify private attributes of a class in a controlled way.
+In Python, attributes can be made private(or protected by convention) using _ or __.Instead of accessing them directly, we use getter and setter methods
+
+This helps with:
+1.Encapsulation
+2.Data hiding
+3.Better control over attribute access
+
+1. Why Getter and Setter?
+Imagine a class where we store a person's age.
+If we allow direct access:
+
+class Person:
+    def __init__(self, age):
+        self.age = age
+p = Person(25)
+p.age = -10   # Invalid age but Python allows it
+
+Here, someone can set an invalid value.
+Getter and Setter help us control this.
+
+2. Example Using Getter and Setter Methods
+
+#getter and setter methods usage
+class Human:
+    def __init__(self,age):
+        self.__age=age # private variable
+
+    #getter
+    def get_age(self):
+        return self.__age
+    
+    #setter
+    def set_age(self,age):
+        if age>0:
+            self.__age=age
+        else:
+            print("Age must be positive")
+
+p = Human(25)
+
+# using getter
+print(p.get_age())
+
+# using setter
+p.set_age(30)
+print(p.get_age())
+
+p.set_age(-5)   # invalid
+
+#Modren way
+class Person:
+
+    def __init__(self, age):
+        self.__age = age
+
+    # Getter
+    @property
+    def age(self):
+        return self.__age
+
+    # Setter
+    @age.setter
+    def age(self, value):
+        if value > 0:
+            self.__age = value
+        else:
+            print("Age must be positive")
+
+
+p = Person(25)
+
+print(p.age)   # getter
+p.age = 35     # setter
+print(p.age)
+
+p.age = -5     # invalid
+
+
 
 
 

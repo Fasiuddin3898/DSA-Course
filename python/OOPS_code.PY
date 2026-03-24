@@ -277,3 +277,57 @@ o2=Order("any2",10)
 print(o1>o2)
 
 
+#getter and setter methods usage
+class Human:
+    def __init__(self,age):
+        self.__age=age # private variable
+
+    #getter
+    def get_age(self):
+        return self.__age
+    
+    #setter
+    def set_age(self,age):
+        if age>0:
+            self.__age=age
+        else:
+            print("Age must be positive")
+
+p = Human(25)
+
+# using getter
+print(p.get_age())
+
+# using setter
+p.set_age(30)
+print(p.get_age())
+
+p.set_age(-5)   # invalid
+
+#Modren way
+class Person:
+
+    def __init__(self, age):
+        self.__age = age
+
+    # Getter
+    @property
+    def age(self):
+        return self.__age
+
+    # Setter
+    @age.setter
+    def age(self, value):
+        if value > 0:
+            self.__age = value
+        else:
+            print("Age must be positive")
+
+
+p = Person(25)
+
+print(p.age)   # getter
+p.age = 35     # setter
+print(p.age)
+
+p.age = -5     # invalid

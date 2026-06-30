@@ -317,8 +317,3 @@ p.age = 35     # setter
 print(p.age)
 
 p.age = -5     # invalid
-
-
-
-
-

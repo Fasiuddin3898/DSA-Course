@@ -73,3 +73,18 @@ def func4(a,b,c,d,e,f):
     return
 
 func4(1,2,3,4,5,6)
+
+# A clouser function happens when an inner function remebers variables from its outer function even after the
+# outer function has finished execution.
+
+def outer():
+    message = "Hello"
+    def inner():
+        print(f'message {message}')
+
+    return inner
+
+x=outer()
+print(f' first execution of x {x}')
+x()
+print(f'2nd execution of x {x()}')

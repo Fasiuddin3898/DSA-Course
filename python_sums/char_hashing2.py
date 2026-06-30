@@ -1,3 +1,5 @@
+# building a frequency hash array to count how many times certain characters appear in the string.
+
 s="xyxyxywywytytytyAWYHHHHDFGHRTYaaaaa" 
 q=["x","y","w","A","a","H","M"]
 

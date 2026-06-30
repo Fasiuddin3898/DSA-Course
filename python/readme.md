@@ -1,4 +1,4 @@
-What is python..?
+# What is python..?
 Python is High-Level, interpreted, Dynamically typed, Object-Oriented programming languauge, which supports
 multi paradigms like OOPs, Functional, Procedural
 
@@ -9,7 +9,7 @@ a.append(3)  # allowed
 b = "hello"
 b[0] = "H"  # ❌ error
 
-what is list:ordered mutable collection ex:lst=[1,2,3]
+# what is list:ordered mutable collection ex:lst=[1,2,3]
 important list methods
 lst.append(x) #adds element at last
 lst.insert(i,x) #inserts element at i index
@@ -27,7 +27,7 @@ squares=[x*x for x in range(5)]
 with condition
 even=[x for x in range(10) if x%2 ==0]
 
-shallow Copy vs Deep Copy
+# shallow Copy vs Deep Copy
 Shallow Copy:Creates a new object but reference the originals nested elements
 if you modify the nested element in the copy,it will change in the original because
 they share the same memory address for the inner item
@@ -60,7 +60,7 @@ for num in lst:
     else:
         seen.add(num)
 
-What is Tuple:A tuple is a buil-in python data structure used to store A
+# What is Tuple:A tuple is a buil-in python data structure used to store A
 collection of items in a single varaible.it is very simillar to a lit, but 
 with one critical difference is it is Immutable
 Key Characteristics
@@ -79,6 +79,7 @@ mixed_tuple = ("Alice", 25, True)
 single_item = ("apple",) 
 # Without the comma, Python treats it as a string: ("apple")
 
+# Important
 In a Python interview, you should explain that tuples are faster than lists because their immutability allows for several low-level optimizations in the CPython interpreter: 
 1. Lower Memory Overhead (No Over-allocation) 
 Lists are dynamic; they over-allocate extra memory slots to make future append() operations efficient.
@@ -173,26 +174,47 @@ square= lambda x: x**2
 ans=square(4) # output:16
 
 2.Using the filter() find even numbers:Lambda function is frequently used to filter items in a list based on a condition.
+Filter key word is used to select elements from an iterrable based on a condition.filter(function, iterable)
 numbers=[1,2,3,4,5,6,7,8,9,10]
 even_numbers=list(filter(lambda x: x%2==0,numbers))
 print(even_numbers) #output [2,4,6,8,10]
 
 3.Using with map():Apply an operation to every item in a list
+Map is used to transform every element in aiterable.map(function, iterable)
 names=["alice","bob","fasi"]
 captalized=list(map(lambda x:x.upper(),names))
 print(captalized) # output ["ALICE","BOB","FASI"]
 
+Feature	      map()	                filter()
+Purpose. 	  Transform data	    Select data
+Function	  Returns new value	    Returns True/False
+Output size	  Same as input	        Smaller or equal
+
 4. Custom Sorting:Sort a list of tuples by the second element (e.g., age): 
 students = [("Alice", 25), ("Bob", 22), ("Charlie", 28)]
-sorted_students = sorted(students, key=lambda student: student[1])
+sorted_students = sorted(students, key=lambda student: student[1]) # here key based on which position we are trying to sort from the tuple or list
 print(sorted_students)  # Output: [('Bob', 22), ('Alice', 25), ('Charlie', 28)]
+#Sorted function takes different arguments like this sorted(iterable, key=None, reverse=False)
+iterable → required (list, tuple, etc.)
+key → optional (function to decide sorting logic)
+reverse → optional (True for descending)
 
 **Closure:A closure in Python is a nested function that remembers and can access the variables from its outer(enclosing) function scope, even after the outer function has finished exexuting.
 def outer(x):
     def inner(y):
+        print(f'x+y is {x+y}')
         return x+y
-add5=outer(5)
-print(add5(10)) #output 15
+    return inner
+add=outer(10)
+print(f'add {add}')
+print(f'add2 {add(4)}')
+
+#output is 
+add <function outer.<locals>.inner at 0x10443c9a0>
+x+y is 14
+add2 14
+
+
 When clouser is used
 1.Data Hiding:They provide a simple way to hide data from global scope,simlar to private variables in class
 2.Function Factories:You can use them to generate many specialized functions with different preset behaviours
@@ -221,5 +243,30 @@ def hello2():
 hello2()
 
 
+#Global variable is something which is defined outside the function and can only read inside the function we can not modify it inside the function with using the global as a key world
+✅ Case 1: Only reading → NO problem
+x = 10
+def show():
+    print(x)   # ✔ allowed
+show()
+👉 Output:
+10
 
+❌ Case 2: Modifying without global keyword
+x = 10
+def change():
+    x = x + 5   # ❌ Error
+change()
+👉 Error:
+UnboundLocalError
+
+✅ Correct way to modify
+x = 10
+def change():
+    global x
+    x = x + 5
+change()
+print(x)
+👉 Output:
+15
 

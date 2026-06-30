@@ -1,0 +1,14 @@
+In the Honda Industrial Data Platform we built a cloud-native IoT data pipeline on
+AWS to ingest and process telemetry data from manufacturing machines across multiple facilities.
+Sensor data from factory machines was published to AWS IoT Core through edge gateways.
+The IoT Rules Engine routed this telemetry into AWS IoT SiteWise, where we defined asset models
+(which contains attributes,measurmenets,transforms and metrics) representing machines 
+and their telemetry properties such as temperature and pressure.
+The data streams attached to these assets stored time-series telemetry for monitoring and analytics.
+Raw data was also persisted to S3 for long-term storage and future analytics use cases.
+I primarily worked on backend automation for asset model and asset creation,
+where I built Python automation to generate Excel templates and 
+process uploaded files to dynamically create assets in SiteWise.
+Also I have used dynamoDB as a data base to store all the meta data of assets models and also data stream meta data 
+I also implemented secure file upload using S3 presigned URLs and
+automated deployments using AWS CDK integrated with CodePipeline for CI/CD.

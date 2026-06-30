@@ -68,11 +68,54 @@ select s_name, age from student where age >=18;
 Having Clause:Think of it Like filtering after grouping
 When to use Having clause:You use Having clause when you want to filter groups created by group by clause based on Aggregate results, Like counts or sums
 Example:How many students are in each age group but only display age groups with more then one student
-select age,count(roll_no) as no_of_students from student group by age having count(roll_no)>1;
+SELECT age, COUNT(roll_no) AS no_of_students
+FROM student
+GROUP BY age
+HAVING COUNT(roll_no) > 1;
 
 age     |    no_of_students
 20      |    3
 22      |    2
+
+Step-by-Step Execution
+🔹 1. FROM student
+👉 SQL first looks at the student table
+Example data:
+roll_no | age
+1       | 20
+2       | 20
+3       | 22
+4       | 20
+5       | 22
+6       | 25
+🔹 2. GROUP BY age
+👉 Rows are grouped based on age
+It internally creates groups like:
+Age 20 → [1,2,4]
+Age 22 → [3,5]
+Age 25 → [6]
+🔹 3. COUNT(roll_no)
+👉 Counts number of students in each group
+Age 20 → 3 students
+Age 22 → 2 students
+Age 25 → 1 student
+🔹 4. HAVING COUNT(roll_no) > 1
+👉 Filters groups, not rows
+Keeps groups where count > 1
+Removes groups where count ≤ 1
+So:
+Age 20 → ✅ keep (3)
+Age 22 → ✅ keep (2)
+Age 25 → ❌ remove (1)
+🔹 5. Final Output
+age | no_of_students
+20  | 3
+22  | 2
+
+🧠 WHERE vs HAVING
+Clause	Works On	When Used
+WHERE	Rows	    Before grouping
+HAVING	Groups	    After grouping
 
 8.What are aggregate functions in SQL, and can you provide examples.?
 a.count():it counts the number of rows or non-null values in a column
@@ -216,10 +259,3 @@ This means that for every individual borrowed book entry(new row) added to Borro
 begin update books set available_count = available_count-1 where book_id=NEW.book_id;
 end;
 Finally update books
-
-
-
-
-
-
-

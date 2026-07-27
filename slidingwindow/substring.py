@@ -1,3 +1,7 @@
+# In sliding window to get a length at given point the formula is j-i+1 if we are taking two pointers
+# We take dict to store the characters as key and when they appeared as value
+# Always remember that when we increment the value in dict check for the max value like between left and increment value of dict
+
 def substring(s):
     n=len(s)
     left=0

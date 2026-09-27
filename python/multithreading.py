@@ -47,7 +47,7 @@ print(f'I completed the tasks in this time {time.time()-t}')
 
 # Defination: Multithreading is a thechnique that allows a single process to execute multiple threads concurrently.
 # because the threds share the same memory space and resource, they can communicate ans share information more easily then seperate process
-# GIL (Global Interpreter Lock) is a critical future in standard python, The Global Interpreter Lock ensures only one thread executes python bytecode at given moment
+# GIL (Global Interpreter Lock) is a critical feature in standard python, The Global Interpreter Lock ensures only one thread executes python bytecode at given moment
 # Because of this, python multiple threading typically achives concurrency but not true parallelism(where tasks run at the exact same instant on different CPU cores)
 
 #Solid example of multi threading is input/output Bound tasks
@@ -84,6 +84,9 @@ print(f' time taken to complete {time.time()-start}')
 # Both are used to achieve multitasking
 # Multiple threads leaves within in the same process 
 # The benefit of multiprocessing is that error or memory leak in one process won't hurt execution of another process
+
+# In CPython GLI allows to run multiple threds concurrently by switching between them,but it prevents multiple threds from executing python
+# bytecode in parallel at same time 
 
 
 

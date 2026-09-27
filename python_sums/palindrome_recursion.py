@@ -11,6 +11,13 @@ def palin(st):
         print(st[::-1])
         print(True)
 
+def recursive(st,left,right):
+    if left>=right:
+        return True
+    if st[left]!=st[right]:
+        return False
+    return recursive(st,left+1,right-1)
+
 def main():
     st="mom"
     palin(st)

@@ -1,4 +1,4 @@
-def maxSubArray_brute(nums):  # Here TC is O(N)
+def maxSubArray_brute(nums):  # Here TC is O(N**2)
     n=len(nums)
     max_sum=float("-inf")
     for i in range(n):
@@ -25,6 +25,24 @@ def main():
     nums=list(map(int,input().split(" ")))
     maxSubArray_brute(nums)
     maxSubArray(nums)
+
+def maxsubarray_maxsum():
+    lst=[-2,1,-3,4,-1,2,1,-5,4]
+    n=len(lst)
+    maxi=float('-inf')
+    total=0
+    lst_ans=[]
+    temp=0
+    for i in range(0,n):
+        total+=lst[i]
+        if total>maxi:
+            maxi=total
+            lst_ans=lst[temp:i+1]
+        if total<0:
+            total=0
+            temp=i+1
+    print(maxi)
+    print(lst_ans)
 
 if __name__=="__main__":
     main()
